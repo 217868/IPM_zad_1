@@ -12,7 +12,6 @@ body {
 .field {
     width: 100%;
     display: flex;
-
     margin-bottom: 5px;
 }
 
@@ -32,5 +31,5 @@ body {
 }
 
 .field input:valid {
-    border-color: blue;
+    border-color: green;
 }
