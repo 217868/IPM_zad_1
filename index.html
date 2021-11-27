@@ -3,53 +3,52 @@
     <head>
         <link rel="stylesheet" href="style.css">
         <title>244048 - Arkadiusz Zasina</title>
-        <script type="text/javascript" src="script.js"></script>
     </head>
     <body>
-        <form class="form" onsubmit="return onSubmit(this)">
+        <form class="form">
             <div class="field">
                 <label for="email">Adres email:</label>
-                <input required type="email" name="email" id="email">
+                <input placeholder="email@domain.com" required type="email" name="email" id="email">
             </div>
             <div class="field">
                 <label for="code">Kod pocztowy:</label>
-                <input required type="text" name="code" id="code" pattern="111">
+                <input placeholder="00-000" required type="text" name="code" id="code" pattern="[0-9]{2}-[0-9]{3}">
             </div>
             <div class="field">
                 <label for="nip">Numer nip:</label>
-                <input required type="text" name="nip" id="nip">
+                <input placeholder="000-00-00-000" required type="text" name="nip" id="nip" pattern="[0-9]{3}-(([0-9]{2}-[0-9]{2}-[0-9]{3})|([0-9]{3}-[0-9]{2}-[0-9]{2}))">
             </div>
             <div class="field">
                 <label for="idNo">Numer dowodu:</label>
-                <input required type="text" name="idNo" id="idNo">
+                <input placeholder="AAA000000" required type="text" name="idNo" id="idNo" pattern="[A-Z]{3}[0-9]{6}">
             </div>
             <div class="field">
                 <label for="ipv4">Adres IPv4:</label>
-                <input required type="text" name="ipv4" id="ipv4">
+                <input placeholder="0.0.0.0" required type="text" name="ipv4" id="ipv4" pattern="^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$">
             </div>
             <div class="field">
                 <label for="page">Strona www:</label>
-                <input required type="text" name="page" id="page">
+                <input placeholder="https://www.webpage.com" required type="url" name="page" id="page">
             </div>
             <div class="field">
                 <label for="path">Ścieżka:</label>
-                <input required type="text" name="path" id="path">
+                <input placeholder="C:\windows\temp" required type="url" name="path" id="path" pattern="[A-z]:\\(windows|winnt|win|dos|msdos)(\\[a-z]+)*">
             </div>
             <div class="field">
                 <label for="path2">Ścieżka2:</label>
-                <input required type="text" name="path2" id="path2">
+                <input placeholder="d:\MsDos" required type="url" name="path2" id="path2" pattern="[A-z]:\\((?i)(windows|winnt|win|dos|msdos))(\\[A-z]+)*">
             </div>
             <div class="field">
                 <label for="filePath">Ścieżka do pliku:</label>
-                <input required type="text" name="filePath" id="filePath">
+                <input placeholder="/etc/folder/nextFolder" required type="url" name="filePath" id="filePath" pattern="\/etc\/([A-z]*\/?)*">
             </div>
             <div class="field">
                 <label for="ipv6">Adres IPv6:</label>
-                <input required type="text" name="ipv6" id="ipv6">
+                <input placeholder="0000:0000:0000:0000:0000:0000:0000:0000" required type="text" name="ipv6" id="ipv6" pattern="(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))">
             </div>
             <div class="field">
                 <label for="phoneNo">Numer telefonu:</label>
-                <input required type="text" name="phoneNo" id="phoneNo">
+                <input placeholder="" required type="text" name="phoneNo" id="phoneNo" pattern="(+[0-9]{1,3})?[0-9]{9}">
             </div>
             <input type="submit" value="Submit">
         </form>
