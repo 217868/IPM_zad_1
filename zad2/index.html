@@ -20,7 +20,7 @@
             </div>
             <div class="field">
                 <label for="idNo">Numer dowodu:</label>
-                <input placeholder="AAA000000" required type="text" name="idNo" id="idNo" pattern="[A-Z]{3}[0-9]{6}">
+                <input placeholder="AAA000000" required type="text" name="idNo" id="idNo" pattern="[A-Za-z]{3}[0-9]{6}">
             </div>
             <div class="field">
                 <label for="ipv4">Adres IPv4:</label>
@@ -28,7 +28,7 @@
             </div>
             <div class="field">
                 <label for="page">Strona www:</label>
-                <input placeholder="https://www.webpage.com" required type="url" name="page" id="page">
+                <input placeholder="https://www.webpage.com" required type="text" name="page" id="page" pattern="(www\.|https?:\/\/)?([a-zA-Z0-9]+\.)+([a-zA-Z0-9]+)">
             </div>
             <div class="field">
                 <label for="path">Ścieżka:</label>
@@ -40,7 +40,7 @@
             </div>
             <div class="field">
                 <label for="filePath">Ścieżka do pliku /etc:</label>
-                <input placeholder="/etc/folder/nextFolder" required type="text" name="filePath" id="filePath" pattern="\/etc\/([A-z]*\/?)*">
+                <input placeholder="/etc/file" required type="text" name="filePath" id="filePath" pattern="\/etc\/[A-z0-9]+(\.[A-z0-9]+)?">
             </div>
             <div class="field">
                 <label for="ipv6">Adres IPv6:</label>
