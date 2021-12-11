@@ -50,6 +50,33 @@
                 <label for="phoneNo">Numer telefonu:</label>
                 <input placeholder="+11222333444" required type="text" name="phoneNo" id="phoneNo" pattern="(\+[0-9]{1,2})?[0-9]{9}">
             </div>
+            <div class="field">
+                <label for="date">Data:</label>
+                <input placeholder="" required type="date" name="date" id="date">
+            </div>
+            <div class="field">
+                <label for="dateRestricted">Data w tygodniu:</label>
+                <input placeholder="" required type="date" min="2021-12-06" max="2021-12-10" name="dateRestricted" id="dateRestricted">
+            </div>
+            <div class="field">
+                <label for="time12">Czas 12h:</label>
+                <div class="timePicker">
+                    <input placeholder="" required type="time" min="00:00" max="11:59" name="time12" id="time12">
+                    <select name="ampm" id="ampm">
+                        <option value="am">am</option>
+                        <option value="pm">pm</option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="field">
+                <label for="time24">Czas 24h:</label>
+                <input placeholder="" required type="time" name="time24" id="time24">
+            </div>
+            <div class="field">
+                <label for="colorPicker">Kolor:</label>
+                <input placeholder="" required type="color" name="colorPicker" id="colorPicker">
+            </div>
             <input type="submit" value="Submit">
         </form>
     </body>

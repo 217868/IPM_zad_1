@@ -21,7 +21,7 @@ body {
     margin-right: 15px;
 }
 
-.field input {
+.field input, .field div {
     flex: 1;
     border-width: 4px;
 }
@@ -31,5 +31,9 @@ body {
 }
 
 .field input:valid {
-    border-color: green;
+    border-color: blue;
+}
+
+.field .timePicker {
+    display: flex;
 }
