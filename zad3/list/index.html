@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>244048 - Arkadiusz Zasina</title>
+    </head>
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function dragStart(ev) {
+            console.log(ev);
+            let index = findTargetIndex(ev);
+            ev.dataTransfer.setData("text", index);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            console.log(ev);
+            let indexToInsert = parseInt(ev.dataTransfer.getData("text"));
+            console.log(indexToInsert);
+            let indexToInsertAfter = findTargetIndex(ev);
+            let child = ev.target.parentNode.children[indexToInsert];
+            let childBefore = ev.target.parentNode.children[indexToInsertAfter];
+            ev.target.parentNode.removeChild(child);
+            ev.target.parentNode.insertBefore(child, childBefore.nextSibling);
+        }
+
+        function findTargetIndex(ev) {
+            let children = Array.prototype.slice.call( ev.target.parentNode.children );
+            return children.findIndex(x => x.attributes['num'].value == ev.target.attributes['num'].value);
+        }
+    </script>
+    <body>
+        <ol>
+            <li draggable="true" num=1 ondragstart="dragStart(event)" ondrop="drop(event)" ondragover="allowDrop(event)"><input value="Element 1"></input></li>
+            <li draggable="true" num=2 ondragstart="dragStart(event)" ondrop="drop(event)" ondragover="allowDrop(event)"><input value="Element 2"></input></li>
+            <li draggable="true" num=3 ondragstart="dragStart(event)" ondrop="drop(event)" ondragover="allowDrop(event)"><input value="Element 3"></input></li>
+            <li draggable="true" num=4 ondragstart="dragStart(event)" ondrop="drop(event)" ondragover="allowDrop(event)"><input value="Element 4"></input></li>
+        </ol>
+    </body>
+</html>
