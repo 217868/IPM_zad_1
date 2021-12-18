@@ -1,39 +1,44 @@
-body {
-    background-color: transparent;
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-.form {
-    width: 50%;
+.app {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: 100%;
 }
 
-.field {
+.platform {
+    flex: 8;
+    background-color: rgb(230, 230, 230);
+    height: 100%;
+}
+
+.builder {
+    flex: 2;
+    background-color: rgb(35, 35, 87);
+    height: 100%;
+}
+
+table {
     width: 100%;
+    height: 100%;
+}
+
+td {
+    border: 1px rgb(255, 255, 255) solid;
+}
+
+#boxContainer {
     display: flex;
-    margin-bottom: 5px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    background-color: rgb(55, 55, 121);
 }
 
-.field label {
-    flex: 1;
-    text-align: right;
-    margin-right: 15px;
-}
-
-.field input, .field div {
-    flex: 1;
-    border-width: 4px;
-}
-
-.field input:invalid {
-    border-color: red;
-}
-
-.field input:valid {
-    border-color: blue;
-}
-
-.field .timePicker {
-    display: flex;
+.box {
+    cursor: pointer;
 }

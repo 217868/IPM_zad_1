@@ -10,16 +10,13 @@
         }
 
         function dragStart(ev) {
-            console.log(ev);
             let index = findTargetIndex(ev);
             ev.dataTransfer.setData("text", index);
         }
 
         function drop(ev) {
             ev.preventDefault();
-            console.log(ev);
             let indexToInsert = parseInt(ev.dataTransfer.getData("text"));
-            console.log(indexToInsert);
             let indexToInsertAfter = findTargetIndex(ev);
             let child = ev.target.parentNode.children[indexToInsert];
             let childBefore = ev.target.parentNode.children[indexToInsertAfter];
