@@ -15,6 +15,8 @@
             box.style.width = width;
             box.style.height = height;
             box.style.backgroundColor = "#" + Math.floor(Math.random() *255 * 255 * 255).toString(16);
+            box.setAttribute("draggable", "true");
+            box.setAttribute("ondragstart", "dragStart(event)");
             console.log(box);
             container.innerHTML = "";
             container.appendChild(box);
@@ -25,24 +27,44 @@
         }
 
         function dragStart(ev) {
-            let index = findTargetIndex(ev);
-            ev.dataTransfer.setData("text", index);
+            console.log(event);
+            ev.dataTransfer.setData("text", ev.target.style.backgroundColor);
+        }
+
+        function dragEnter(ev) {
+            if (ev.target.style.backgroundColor != "rgb(230, 230, 230)");
+                ev.target.style.backgroundColor = "rgb(255, 255, 255)";
+
+        }
+
+        function dragLeave(ev) {
+            ev.preventDefault();
+            ev.target.style.backgroundColor = "rgb(230, 230, 230)";
         }
 
         function drop(ev) {
+            dragLeave(ev);
             ev.preventDefault();
-            let indexToInsert = parseInt(ev.dataTransfer.getData("text"));
-            let indexToInsertAfter = findTargetIndex(ev);
-            let child = ev.target.parentNode.children[indexToInsert];
-            let childBefore = ev.target.parentNode.children[indexToInsertAfter];
-            ev.target.parentNode.removeChild(child);
-            ev.target.parentNode.insertBefore(child, childBefore.nextSibling);
+            let color = ev.dataTransfer.getData("text");
+            let x = parseInt(ev.target.attributes['column'].value);
+            let y = parseInt(ev.target.attributes['row'].value);
+            let table = ev.target.parentNode.parentNode;
+            let targetCell = findFirstFreeCell(table, x);
+            targetCell.style.backgroundColor = color;
+
+            let boxContainer = document.getElementById("boxContainer");
+            boxContainer.innerHTML = "";
         }
 
-        // function findTargetIndex(ev) {
-        //     let children = Array.prototype.slice.call( ev.target.parentNode.children );
-        //     return children.findIndex(x => x.attributes['num'].value == ev.target.attributes['num'].value);
-        // }
+        function findFirstFreeCell(table, x) {
+            for (let i = 7; i >= 0; i--) {
+                let cell = table.rows[i].children[x];
+                if (cell.style.backgroundColor == "rgb(230, 230, 230)") {
+                    return cell;
+                }
+            }
+            return undefined;
+        }
 
         function initializeTable(ev) {
             let table = document.getElementById("maingrid");
@@ -51,6 +73,13 @@
                 table.appendChild(row);
                 for (let j = 0; j < 8; j++) {
                     let cell = document.createElement("td");
+                    cell.setAttribute("ondragenter", "dragEnter(event)");
+                    cell.setAttribute("ondragleave", "dragLeave(event)");
+                    cell.setAttribute("ondragover", "allowDrop(event)");
+                    cell.setAttribute("ondrop", "drop(event)");
+                    cell.setAttribute("column", j);
+                    cell.setAttribute("row", i);
+                    cell.style.backgroundColor = "rgb(230, 230, 230)";
                     row.appendChild(cell);
                 }
             }
