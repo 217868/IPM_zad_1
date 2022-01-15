@@ -1,0 +1,44 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.app {
+    display: flex;
+    height: 100%;
+}
+
+.platform {
+    flex: 8;
+    background-color: rgb(230, 230, 230);
+    height: 100%;
+}
+
+.builder {
+    flex: 2;
+    background-color: rgb(35, 35, 87);
+    height: 100%;
+}
+
+table {
+    width: 100%;
+    height: 100%;
+}
+
+td {
+    border: 1px rgb(255, 255, 255) solid;
+}
+
+#boxContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 200px;
+    background-color: rgb(55, 55, 121);
+}
+
+.box {
+    cursor: pointer;
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>244048 - Arkadiusz Zasina</title>
+    </head>
+    <script>
+        var tilesData = [];
+
+        function getCell(coords) {
+            return tilesData.find((el) => el.x == coords.x && el.y == coords.y);
+        }
+
+        function getCoordsFromEv(ev) {
+            return {
+                x: ev.target.getAttribute('column'),
+                y: ev.target.getAttribute('row')
+            } 
+        }
+
+        function generateBox() {
+            let container = document.getElementById("boxContainer");
+            let box = document.createElement("div");
+            box.setAttribute("class", "box");
+            let width = Math.floor(document.body.clientWidth / 10) + "px";
+            let height = Math.floor(document.body.clientHeight / 8) + "px";
+            box.style.width = width;
+            box.style.height = height;
+            box.style.backgroundColor = "#" + Math.floor(Math.random() *255 * 255 * 255).toString(16);
+            box.setAttribute("draggable", "true");
+            box.setAttribute("ondragstart", "dragStart(event)");
+            container.innerHTML = "";
+            container.appendChild(box);
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function dragStart(ev) {
+            ev.dataTransfer.setData("text", ev.target.style.backgroundColor);
+        }
+
+        function takenDragStart(ev) {
+            ev.dataTransfer.setData("text", ev.target.style.backgroundColor);
+            let cellData = getCell(getCoordsFromEv(ev));
+            cellData.isTaken = false;
+            cellData.color = "rgb(230, 230, 230)";
+            ev.target.style.backgroundColor = "rgb(230, 230, 230)";
+        }
+
+        function dragEnter(ev) {
+            ev.target.style.backgroundColor = "rgb(255, 255, 255)";
+        }
+
+        function dragLeave(ev) {
+            ev.preventDefault();
+            let cellData = getCell(getCoordsFromEv(ev));
+            if (!cellData.isTaken) {
+                ev.target.style.backgroundColor = "rgb(230, 230, 230)";
+            } else {
+                ev.target.style.backgroundColor = cellData.color;
+            }
+        }
+
+        function drop(ev) {
+            dragLeave(ev);
+            ev.preventDefault();
+            let color = ev.dataTransfer.getData("text");
+            let x = parseInt(ev.target.attributes['column'].value);
+            let y = parseInt(ev.target.attributes['row'].value);
+            let table = ev.target.parentNode.parentNode;
+            let freeCellData = findFirstFreeCell(table, x);
+            getCell({x: freeCellData.x, y: freeCellData.y}).color = color;
+
+            let targetCell = freeCellData.cell;
+            targetCell.style.backgroundColor = color;
+            targetCell.setAttribute("ondragstart", "takenDragStart(event)");
+
+            let boxContainer = document.getElementById("boxContainer");
+            boxContainer.innerHTML = "";
+        }
+
+        function findFirstFreeCell(table, x) {
+            for (let i = 7; i >= 0; i--) {
+                let tile = tilesData.find((el) => el.x == x && el.y == i && !el.isTaken)
+                if (tile) {
+                    tile.isTaken = true;
+                    return { 
+                        cell: table.rows[i].children[x],
+                        x: x,
+                        y: i
+                    };
+                }
+            }
+            return undefined;
+        }
+
+        function initializeTable(ev) {
+            let table = document.getElementById("maingrid");
+            for (let i = 0; i < 8; i++) {
+                let row = document.createElement("tr")
+                table.appendChild(row);
+                for (let j = 0; j < 8; j++) {
+                    let cell = document.createElement("td");
+                    cell.setAttribute("ondragenter", "dragEnter(event)");
+                    cell.setAttribute("ondragleave", "dragLeave(event)");
+                    cell.setAttribute("ondragover", "allowDrop(event)");
+                    cell.setAttribute("ondrop", "drop(event)");
+                    cell.setAttribute("column", j);
+                    cell.setAttribute("draggable", "true");
+                    cell.setAttribute("class", "box");
+                    cell.setAttribute("row", i);
+                    cell.style.backgroundColor = "rgb(230, 230, 230)";
+                    row.appendChild(cell);
+
+                    tilesData.push({
+                        x: i,
+                        y: j,
+                        isTaken: false,
+                        color: "rgb(230, 230, 230)"
+                    })
+                }
+            }
+        }
+    </script>
+    <body onLoad="initializeTable(event)">
+        <div class="app">
+            <div class="platform">
+                <table id="maingrid"></table>
+            </div>
+            <div class="builder">
+                <button onclick="generateBox()">Generuj klocek</button>
+                <div id="boxContainer"></div>
+            </div>
+        </div>
+    </body>
+</html>
